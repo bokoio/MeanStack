@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms'
 
 import { Router } from '@angular/router'
 
@@ -42,7 +42,19 @@ export class OrderComponent implements OnInit {
       number: this.formBulder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.formBulder.control(''),
       paymentOption: this.formBulder.control('',[Validators.required])
-    })
+    }, {validator: OrderComponent.equalsTo})
+  }
+
+  static equalsTo(group: AbstractControl):{[key:string]: boolean}{
+    const email = group.get('email')
+    const confirmEmail = group.get('emailConfirmation')
+    if(!email || !confirmEmail){
+      return undefined
+    }
+    if(email.value !== confirmEmail.value){
+      return {emailsNotMatch:true}
+    }
+    return undefined
   }
 
   itemsValue(): number {
