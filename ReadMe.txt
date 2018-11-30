@@ -1492,3 +1492,10 @@ A rota criada foi somente uma e com o caminho padrao (path:'') e que ira carrega
 
 No arquivo app.module.ts foram removidas as importaçoes dos modulos.
 No arquivo app.routes.ts foi criada uma rota nova para o carregamento tardio do modulo.
+
+S8A79 - Criando um CORE Module com serviços
+
+Criada uma nova pasta chamada CORE e o arquivo core.module.ts
+No nosso caso o core model ira refenciar os serviços e nao serao agurpados em uma pasta.
+
+Esse modulo contera somente a lista de providers e nenhum outro codigo.
