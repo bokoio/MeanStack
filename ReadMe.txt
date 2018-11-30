@@ -1615,3 +1615,21 @@ S9A85 - Aplicando animaçoes ao Snackbar:
 
 Serao usadas duas propriedades html para esse componente 
 Hidden e Visible
+
+
+
+S9A86 - Usando Observable para o componente Snackbar:
+
+
+implementaçao de um serviço de notificaçoes
+
+criado o arquivo notification.service.ts
+alterado o shared.module.ts
+
+No shooping-cart.service.ts é onde estao os serviços de inserir e remover itens do carrinho de compras, iremos utilizar ali o serviço de notificaçoes.
+
+**Todo serviço que vai receber algo deve ser marcado como injectable
+import { Injectable } from '@angular/core'
+@Injectable()
+
+
