@@ -1611,3 +1611,7 @@ Alteramos o arquivo app.component.html para inserir a snackbar
 O restante das alteraçoes foram todas feitas dentro do componente.
 
 
+S9A85 - Aplicando animaçoes ao Snackbar:
+
+Serao usadas duas propriedades html para esse componente 
+Hidden e Visible
