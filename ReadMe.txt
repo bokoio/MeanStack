@@ -1633,3 +1633,7 @@ import { Injectable } from '@angular/core'
 @Injectable()
 
 
+S9A87 - Usando os Operadores Do e SwithMap
+
+SwithMap troca o observable.
+Do executa uma acao no meio.
