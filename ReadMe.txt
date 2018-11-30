@@ -1587,3 +1587,27 @@ import 'web-animations-js/web-animations.min.js'
 
 Apos no arquivo app.module.ts:
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
+
+
+
+S9A84 - Definindo um Snackbar:
+
+Iremos criar uma snackbar para informar ao usuario que a açao de adicionar e remover itens do carrinho ocorreu.
+
+Para isso criamos um novo componente dentro do modulo shared
+messages/snackbar
+
+ng g c snackbar --spec=false
+
+Ao ser criado um novo componente dentro de um modulo comportilhado, as definiçoes ja sao inseridas no dentro do modulo que no caso é shared.module.ts
+Nesse caso foi incluido tambem dentro do export para que o novo modulo possa ser compartilhado.
+
+
+Dessa vez o arquivo .css permaneceu e tem conteudo dentro.
+
+Alteramos o arquivo app.component.html para inserir a snackbar
+
+O restante das alteraçoes foram todas feitas dentro do componente.
+
+
