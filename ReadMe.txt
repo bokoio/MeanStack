@@ -1499,3 +1499,11 @@ Criada uma nova pasta chamada CORE e o arquivo core.module.ts
 No nosso caso o core model ira refenciar os serviços e nao serao agurpados em uma pasta.
 
 Esse modulo contera somente a lista de providers e nenhum outro codigo.
+
+
+S8A80 - Adicionando Serviços a um modulo compartilhado (SharedModule with providers)
+
+shared.module.ts
+addicionada o modulo ModuleWithProviders a lista de modulos a serem importados
+app.module.ts
+O core module da pasta passada ja nao é mais util.
