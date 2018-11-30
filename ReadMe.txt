@@ -1517,3 +1517,73 @@ Para isso tem que ser usado o Modulo Angular PreloadAllModules do @angular/route
 Essa configuraçao fica a raiz da aplicaçao (app.module.ts)
 
 Na configuraçao das rotas (imports: RouterModule....) adicionamos as estrategias de carregamento.
+
+S9A82 - Animaçoes
+
+Angular tem um modulo especifico para animaçoes que é baseado em uma spec chamada web animations API
+
+Atualmente somente o chrome e o firefox implementao parte das features. porem tambem esta disponivel como polyfild para o restante dos browsers.
+
+O Modulo de animaçao do angula esta em:
+@angular/animations
+
+Exemplo abaixo é de um botao que ao ser acionado muda de tamanho:
+
+@Component({
+	template: `<button[@stretch]="buttonState" > Click </button>`
+	animations:[
+	trigger(stretch,[
+		state('normal', style({width: '40px'})),
+		state('', style({width: '120px'})),
+		transition('normal => stretched', animate('300ms')),
+		transition('stretched => normal', animate('500ms')),
+	])
+	]	
+})
+
+export class ButtonComponent{buttonState = 'stretched'}
+
+
+Quando temos uma animaçao onde a propriedade transition é igual podemos escrever dessa forma
+
+
+
+@Component({
+	template: `<button[@stretch]="buttonState" > Click </button>`
+	animations:[
+	trigger(stretch,[
+		state('normal', style({width: '40px'})),
+		state('', style({width: '120px'})),
+		transition(' * => * ', animate('300ms')),
+	
+	])
+	]	
+})
+
+
+S9A82 - Instalando o Modulo de animaçoes:
+
+Para usar animaçao é necessario importar as dependencias:
+
+Modulo de animaçao do Angular
+
+Importar o Polyfil (para rowsers que nao suportam animaçoes)
+
+Browser animation 
+
+Module no modulo raiz.
+--------
+
+Modulo de animaçao do angular(forçando a versao para manter a compatibilidade)
+npm install--save @angular/animation@4.0.0
+
+Module PolYfills:
+npm install --save web-animations-js
+
+--------
+
+Na raiz da aplicaçao(../src), no arquivo polyfills.ts
+import 'web-animations-js/web-animations.min.js'
+
+Apos no arquivo app.module.ts:
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
