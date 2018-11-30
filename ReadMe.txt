@@ -1506,4 +1506,14 @@ S8A80 - Adicionando Serviços a um modulo compartilhado (SharedModule with provi
 shared.module.ts
 addicionada o modulo ModuleWithProviders a lista de modulos a serem importados
 app.module.ts
-O core module da pasta passada ja nao é mais util.
+O core module da pasta passada ja nao é mais util. 
+
+S8A81 - Pré-carregamento de todos os modulos: (Pre loading)
+
+Essa funcionalidade permite carregar um modulo em background com uma nova tread, fazendo com que o modulo ao ser requisitado nao demore a ser carregado.
+
+Para isso tem que ser usado o Modulo Angular PreloadAllModules do @angular/router.
+
+Essa configuraçao fica a raiz da aplicaçao (app.module.ts)
+
+Na configuraçao das rotas (imports: RouterModule....) adicionamos as estrategias de carregamento.
