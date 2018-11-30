@@ -9,8 +9,6 @@ git add .
 git commit -m "Comment"
 git push
 
-
-
 iniciar a aplicaçao:
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master
 ng serve
@@ -1482,4 +1480,15 @@ onde foram trazidas as declaraçoes dos componentes para o modulo.
 No modulo raiz da aplicaçao foram removidas as declaraçoes dos 3 componentes e tambem dos componentes raiz carregados na inicializaçao da app.
 
 S8A78 - Feature Module (Modulo de compra)
+Dentro da pasta order criado o arquivo order.module.ts
+Onde foram importados os componentes:
+OrderComponent
+OrderItemsComponent
+DeliveryCostsComponent
+SharedModule
 
+Criada a rota tambem para o carregamento tardio (lazyModule) do modulo de compras.
+A rota criada foi somente uma e com o caminho padrao (path:'') e que ira carregar o componente principal que no caso é o componente de compras (OrderCOmponent)
+
+No arquivo app.module.ts foram removidas as importaçoes dos modulos.
+No arquivo app.routes.ts foi criada uma rota nova para o carregamento tardio do modulo.
