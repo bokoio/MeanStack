@@ -1729,3 +1729,12 @@ onde a transiçao é de void para ready
 A segunda parte é a retirada de itens do carrinho de compra:
 nos mesmos arquivos shopping-cart.component.ts e shopping-cart.component.html
 
+
+S10A93 - Rotas com WildCard(criando a pagina nao encontrada)
+
+criado um novo componente chamado not-found
+na raiz do projeto
+ng g c not-found --spec=false
+
+Definida uma nova rota dentro do arquivo app.routes.ts
+
