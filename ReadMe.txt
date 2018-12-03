@@ -1738,3 +1738,7 @@ ng g c not-found --spec=false
 
 Definida uma nova rota dentro do arquivo app.routes.ts
 
+S10A94 - Gerando o build da aplicaçao:
+
+
+comando ng build
