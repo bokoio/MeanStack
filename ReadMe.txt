@@ -1656,3 +1656,76 @@ A animaçao é feita dentro do Menu Item
 
 Basicamente copia e cola da outra animaçao
 menu-item.component.ts e menu-item.component.html
+
+
+S9A90 - Animaçoes com o componente KeyFrames:
+
+è uma animaçao com varios marcos (ou passos) onde cada um tem um stilo css diferente.
+com KeyFrames, é possivel elaborar animaçoes mais elaboradas.
+
+definir uma animaçao para utilizar keyframes:
+
+@Componet({
+	animations:[
+	trigger('trgname',[
+	...
+		transition('st1 => st2',[
+	   animate('500ms 0s ease-in-out', keyframes ([
+	   //recebe um array de estilos css:
+	   style(transform: 'transform(0px,0px)', offset:0)
+	   style(transform: 'transform(100px,0px)', offset:0.6)
+	   style(transform: 'transform(140px,-30px)', offset:1)
+	   ]))
+	 ])
+	]
+})
+
+Nao è obrigatorio usar o transform podem ser utilizados outros estilos (opacity...)
+
+
+@Componet({
+	animations:[
+	trigger('trgname',[
+	...
+		transition('st1 => st2',[
+	   animate('500ms 0s ease-in-out', keyframes ([
+	   //recebe um array de estilos css:
+	   style({opacity:0, width:'100px', offset:0})
+	   style({opacity:0.8, width:'120px', offset:0.8})
+	   style({opacity:1, width:'100px', offset:1})
+	   ]))
+	 ])
+	]
+})
+
+
+
+S9A91 - Incluindo animaçoes no carrinho de compras com o componente KeyFrames:
+
+Animando a entrada e saida dos itens no carrinho de compras.
+
+Primeira parte a entrada dos itens no carrinho:
+shopping-cart.component.ts e shopping-cart.component.html
+a animaçao sera inserida na parte dinamica do nosso carinho de compras 
+que é no ponto <tr *ngFor="let item of items()">
+
+onde a transiçao é de void para ready
+
+@Component({
+  selector: 'mt-shopping-cart',
+  templateUrl: './shopping-cart.component.html',
+  animations: [
+    trigger('row',[
+      state('ready', style({opacity:1})),
+      transition('void => ready',animate('300ms 0s ease-in',keyframes([
+        style({opacity:0, transform: 'translateX(-30px)', offset:0}),
+        style({opacity:0.8, transform: 'translateX(10px)', offset:0.8}),
+        style({opacity:1, transform: 'translateX(0px)', offset:1})
+        ])))
+      ])
+  ]
+})
+
+A segunda parte é a retirada de itens do carrinho de compra:
+nos mesmos arquivos shopping-cart.component.ts e shopping-cart.component.html
+
