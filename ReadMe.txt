@@ -1649,3 +1649,10 @@ Uma vez que a configuraçao da animaçao esteja pronta(restaurant.component.ts) 
 _) Associar a trigger a um elemento (<div class="place-info-box" [@restaurantAppeared]='restaurantState' >) dentro do arquivo restaurant.component.html
 _) Associar a trigger a um stado do elemento.
 restaurant.component.ts
+
+S9A89 - Incluindo animaçoes nos itens do menu:
+
+A animaçao é feita dentro do Menu Item
+
+Basicamente copia e cola da outra animaçao
+menu-item.component.ts e menu-item.component.html
