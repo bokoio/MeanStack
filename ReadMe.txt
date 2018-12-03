@@ -1637,3 +1637,15 @@ S9A87 - Usando os Operadores Do e SwithMap
 
 SwithMap troca o observable.
 Do executa uma acao no meio.
+
+
+S9A88 - Utilizando outros metodos de animaçao:
+
+Apresentar a lista dos restaurantes de forma animada.
+
+A animaçao vai ser feita no componente individual (no caso do restaurante) restaurant.component.ts
+
+Uma vez que a configuraçao da animaçao esteja pronta(restaurant.component.ts) existem 2 passos a serem realizados ainda:
+_) Associar a trigger a um elemento (<div class="place-info-box" [@restaurantAppeared]='restaurantState' >) dentro do arquivo restaurant.component.html
+_) Associar a trigger a um stado do elemento.
+restaurant.component.ts
