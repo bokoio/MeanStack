@@ -1781,9 +1781,37 @@ Um problema é que o google nao reconhece mais os endereços url com # para isso
 
 
 
-S10A96 - Personalizando a Construçao da aplicaçao com variaveis de ambiente:
+S10A96 - Personalizando a Construçao da aplicaçao com variaveis de ambiente(Build Personalizado):
 
 Alterados os  arquivos environment.ts environment.prod.ts e app.api.ts
 
 O que ira identificar o ambiente ao qual esta rodando o servidor ng ou os objetos compilados è o parametro da chamada desses compiladores
+
+S10A97 - Deploy para o Apache http server:
+
+Nao tem codigo diferente para o apache como é uma pagina statica é so copiar os arquivos gerados na compilaçao e colar na pasta do apache
+/var/www/html
+
+S10A98 -  Deploy usando Estrategia de caminho - Apache  HTTP Server:
+
+Para essa aula foi removido o codigo do provider do arquivo app.module.tso 
+{provide: LocationStrategy, useClass: HashLocationStrategy},
+
+Alterado o arquivo de configuraçao do site do (no caso esta em /etc/apache2/sites-available/000-default.conf) Apache para inserir o codigo abaixo:
+
+no ubuntu abilitar o modo rewrite do apache
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+sudo service apache2 restart
+sudo service apache2 stop
+
+RewriteEngine On
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
+RewriteRule ^ /index.html
+
+funciona sem o # e abre a url direto de um link qualquer sem passar pela pagina inicial.
+
+
 
