@@ -1778,3 +1778,12 @@ Indicando que quando alguem solicitar a estrategia de localizaçao(LocationStrat
 Apos essa configuraçao o # ja aparece na url de desenvolvimento e na url de prod tambem.
 
 Um problema é que o google nao reconhece mais os endereços url com # para isso devemos tomar outras medidas. que serao explicadas mais tarde.
+
+
+
+S10A96 - Personalizando a Construçao da aplicaçao com variaveis de ambiente:
+
+Alterados os  arquivos environment.ts environment.prod.ts e app.api.ts
+
+O que ira identificar o ambiente ao qual esta rodando o servidor ng ou os objetos compilados è o parametro da chamada desses compiladores
+
