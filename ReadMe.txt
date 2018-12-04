@@ -1740,5 +1740,41 @@ Definida uma nova rota dentro do arquivo app.routes.ts
 
 S10A94 - Gerando o build da aplicaçao:
 
-
 comando ng build
+
+ng build --prod
+
+utilizando somente o comando 
+ng build ira gerar o codigo de desenvolvimento com os arquivos para o debug da aplicaçao.
+
+
+S10A95 - Modificando a estrategia de Navegaçao(Hash)
+
+Caminhos e localizaçao de url do angular.
+
+No ambiente de desemvolvimento a url ao acessar diretamente uma url a aplicaçao responde a essa url 
+http://localhost:4200/restaurants/bread-bakery/menu
+
+Ja no ambiente de produçao com um http server qualquer o mesmo comportamento nao se verifica.
+ao acessar diretamente uma url o servidor responde com 404.
+http://localhost:8000/restaurants/bread-bakery/menu
+
+Porque isso acontece:
+No servidor webpack de desenvolvimento, quando uma url nao é encontrada ele devolve sempre a pagina inicial da aplicaçao.
+Com isso da um start na aplicaçao Angular que ira resolver o endereço solicitado. Com isso obtemos o resultado esperado.
+
+Ja com o um http server, ele procura diretamente pela url e caso nao encontre, retorna 404, o servidor nao inicia a aplicaçao Angular.
+
+Para solucionar esse problema, basta inserir o # apos o index da aplicaçao, com isso o servidor ira interpretar que tudo o que vier apos o # é de responsabilidade do front end e nao mais do servidor, com isso a aplicaçao angular sera iniciada e respondera corretamente as requisiçoes de uma url "direta"
+
+A alteraçao é feita diretamente no modulo raiz da aplicaçao(app.module.ts)
+
+Para isso é necessario importar 2 modulos:
+LocationStrategy, HashLocationStrategy from Common
+
+Foi criado um novo provider,
+Indicando que quando alguem solicitar a estrategia de localizaçao(LocationStrategy), seja utilizada uma outra classe (HashLocationStrategy) 
+
+Apos essa configuraçao o # ja aparece na url de desenvolvimento e na url de prod tambem.
+
+Um problema é que o google nao reconhece mais os endereços url com # para isso devemos tomar outras medidas. que serao explicadas mais tarde.
