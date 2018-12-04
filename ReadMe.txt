@@ -1883,3 +1883,15 @@ inserido dentro do arquivo css da aplicaçao uma configuraòao para que o compon
 style.css
 
 
+S12A103 - Adicionando animaçao a barra de busca:
+
+Adicionando animaçoes no componente:
+
+restaurants.component.ts
+restaurants.component.html
+style.css
+
+Tambem foi inserido e evento do botao de pesquisa para mostrar ou esconder a barra de digitaçao.
+
+
+S12A104 -
