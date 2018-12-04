@@ -1787,12 +1787,12 @@ Alterados os  arquivos environment.ts environment.prod.ts e app.api.ts
 
 O que ira identificar o ambiente ao qual esta rodando o servidor ng ou os objetos compilados è o parametro da chamada desses compiladores
 
-S10A97 - Deploy para o Apache http server:
+S11A97 - Deploy para o Apache http server:
 
 Nao tem codigo diferente para o apache como é uma pagina statica é so copiar os arquivos gerados na compilaçao e colar na pasta do apache
 /var/www/html
 
-S10A98 -  Deploy usando Estrategia de caminho - Apache  HTTP Server:
+S11A98 -  Deploy usando Estrategia de caminho - Apache  HTTP Server:
 
 Para essa aula foi removido o codigo do provider do arquivo app.module.tso 
 {provide: LocationStrategy, useClass: HashLocationStrategy},
@@ -1815,7 +1815,7 @@ funciona sem o # e abre a url direto de um link qualquer sem passar pela pagina 
 
 
 
-S10A99 - Deploy utilizando o .htaccess (Apache HTTP Server) :
+S11A99 - Deploy utilizando o .htaccess (Apache HTTP Server) :
 
 Caso nao tenhamos acesso aos arquivos do Apache.
 
@@ -1836,7 +1836,7 @@ RewriteRule ^ /index.html
 e criado o arquivo .htaccess diretamente dentro da pasta onde esta o site(aplicaçao) que no caso é /var/www/html/
 
 
-S10A100 - Modificando o base-href para deploys em Subdiretorios
+S11A100 - Modificando o base-href para deploys em Subdiretorios
 
 Devolvi o codigo para dentro do arquivo de configuraçao especifico do site 000... porque dentro do .htaccess nao estava funcionando.
 
@@ -1863,5 +1863,23 @@ bh é o nome resumido de basic href
 
 Esse comportamento nao é esclusivo do apache poder ser para qualquer servidor.
 
+
+
+S11A101 - Resumo do Processo de Build e Deploy
+
+Build
+ng build
+ng build --prod
+ng build --prod --bh=/meat/
+
+
+S12A102 - Adicionando a busca por restaurantes
+
+Parte visual da pagina incluindo a pesquisa.
+component: restaurants.component.html
+inserido o componente de busca e colocado ele na parte direita do video
+
+inserido dentro do arquivo css da aplicaçao uma configuraòao para que o componente de busca (a lupa) fique com o mesmo esquema de cores que o restante da aplicaçao:
+style.css
 
 
