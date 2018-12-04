@@ -1815,3 +1815,53 @@ funciona sem o # e abre a url direto de um link qualquer sem passar pela pagina 
 
 
 
+S10A99 - Deploy utilizando o .htaccess (Apache HTTP Server) :
+
+Caso nao tenhamos acesso aos arquivos do Apache.
+
+Verificar ao menos no (httpd.conf no caso do mac e do windows e no caso do linux o arquivo apache2.conf)
+se o AllowOverride esteja = All
+ou que tenha alguma outra configuraçao que permita acesso ao htaccess da aplicaçao.
+
+
+
+Removido o codigo do arquivo 000-default.conf
+
+RewriteEngine On
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
+RewriteRule ^ /index.html
+
+e criado o arquivo .htaccess diretamente dentro da pasta onde esta o site(aplicaçao) que no caso é /var/www/html/
+
+
+S10A100 - Modificando o base-href para deploys em Subdiretorios
+
+Devolvi o codigo para dentro do arquivo de configuraçao especifico do site 000... porque dentro do .htaccess nao estava funcionando.
+
+Criando uma pasta nova dentro de onde estavam todos os arquivos:
+
+/var/www/html/.... antes
+/var/www/html/meat depois
+
+A aplicaçao deixa de funcionar com essa configuraçao.
+
+Dentro da pagina index.html 
+tem uma tag utilizada pelo angular para identificar onde esta a pagina inicial da aplicaçao que no caso esta na raiz /.... ao criarmos uma pasta dentro da raiz e colocar todos os arquivos dentro da pasta e deixando a pasta raiz / somente com essa nova pasta a plicaçao nao carrega mais
+
+A tag è  <base href="/">
+Nao precisa modificar diretamente essa tag para  <base href="/meat/">
+porque em ambiente de desenvolvimento iria quebrar o build local.
+
+Para resolver esse problema basta adicionar uma outra instruçao ao build da aplicaçao:
+
+ng build --prod --bh=/meat/
+
+bh é o nome resumido de basic href
+
+
+Esse comportamento nao é esclusivo do apache poder ser para qualquer servidor.
+
+
+
