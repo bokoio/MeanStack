@@ -27,7 +27,12 @@
         <div class="row">
             <div *ngFor="let restaurant of restaurants" class="col-sm-6 col-xs-12">
               <mt-restaurant [restaurant]="restaurant"></mt-restaurant>
-            </div>             
+            </div>   
+            <div *ngIf="restaurants?.length ===0" class="col-xs-12">
+              <p class="lead text-center">
+                Sem Itens a serem exibidos com os criterios da busca
+              </p>              
+            </div>          
         </div>
 
       </section>

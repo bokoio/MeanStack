@@ -1955,4 +1955,35 @@ this.searchControl.valueChanges
 Inserido junto a barra (pois ela mantem o filtro apos fechada) indicaçao do que foi digitado.
 
   <span *ngIf="iptSearch.value"><small>"{{iptSearch.value}}"</small></span>
-  
+
+
+
+
+S11A106 - Prevenindo a interrupçao do Observable ValueChanges(tratamento de erros)
+
+O observable ValueChanges é um observable reutilizavel, diferente do observable http onde o evento é disparado seja com erro ou com a mensagem de sucesso.
+
+Ja no caso desse observable se algo quebrar no backend o observable para de funcionar. E a aplicaçao quebra.
+
+Para simular um erro:
+
+-Abrir a aplicaçao consultar alguma coisa.
+-Para o backend (json server).
+-Limpar o campo de pesquisa.
+
+A tela permanece filtrada e sem nenhuma informaçao de erro na consulta.
+
+
+Para sanar esse problema:
+
+Se utiliza o cath para capturar o erro e devolver um outro observable ao observable.
+
+import 'rxjs/add/operator/catch'
+import 'rxjs/add/observable/from'
+import {Observable} from "rxjs"
+
+inserida uma div para apresentar uma mensagem mais amigavel ao usuario
+
+sempre no componente restaurants...
+
+
