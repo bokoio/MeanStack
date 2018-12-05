@@ -14,7 +14,10 @@ cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master
 ng serve
 open new tab
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master
-	
+antes:
+json-server db.json
+agora:
+node backend/server.js	
 
 Instalaçao do NODEJS
 --ja tinha instalada a versao v8.10.0
@@ -2048,6 +2051,49 @@ Muitos error reportados pelo build
 Por causa do metodo Http do angular que mudou alteramos para HttpClient
 
 Iniciada a correçao pelo arquivo principal da aplicaòao o app.module.ts
+
+
+
+S14A109 - Personalizando o BackEnd:
+
+
+inserindo controles no json server para incluir controles e https
+Esse exemplo foi retirado da https://github.com/typicode/json-server/blob/master/README.md
+
+esse script vai fazer subir o servidor do json personalizado e nao mais o standard
+
+comando utilizado
+node backend/server.js
+
+const jsonServer = require('json-server')
+const server = jsonServer.create()
+const router = jsonServer.router('db.json')
+const middlewares = jsonServer.defaults()
+
+// Set default middlewares (logger, static, cors and no-cache)
+server.use(middlewares)
+
+// Add custom routes before JSON Server router
+server.get('/echo', (req, res) => {
+  res.jsonp(req.query)
+})
+
+// To handle POST, PUT and PATCH you need to use a body-parser
+// You can use the one used by JSON Server
+server.use(jsonServer.bodyParser)
+server.use((req, res, next) => {
+  if (req.method === 'POST') {
+    req.body.createdAt = Date.now()
+  }
+  // Continue to JSON Server router
+  next()
+})
+
+// Use default router
+server.use(router)
+server.listen(3000, () => {
+  console.log('JSON Server is running')
+})
 
 
 
