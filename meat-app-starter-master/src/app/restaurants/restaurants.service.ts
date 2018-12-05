@@ -17,9 +17,10 @@ export class RestaurantsService {
 	constructor( private http: Http) {
 		// code...
 	}
-
-	restaurants(): Observable<Restaurant[]> {
-		return this.http.get(`${MEAT_API}/restaurants`)
+  // aqui foi inserido o codigo de pesquisa por restaurantes
+  // o que nos 
+	restaurants(search?: string): Observable<Restaurant[]> {
+		return this.http.get(`${MEAT_API}/restaurants`, {params: {q: search} } )
       .map(response => response.json())
       .catch(ErrorHandler.handlreError)
 	}

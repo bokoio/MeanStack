@@ -14,7 +14,7 @@ cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master
 ng serve
 open new tab
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master
-json-server db.json
+	
 
 Instalaçao do NODEJS
 --ja tinha instalada a versao v8.10.0
@@ -1894,4 +1894,22 @@ style.css
 Tambem foi inserido e evento do botao de pesquisa para mostrar ou esconder a barra de digitaçao.
 
 
-S12A104 -
+S12A104 - Observable ValueChanges de Reactive Forms:
+
+
+Foram criados os controlers do form no componente restautants.componet.ts e inseriada a dependencia no form html 
+
+Para criar o listner de digitação do campo de busca foi inserida uma nova diretiva tambem no form html
+
+O form control tem uma propriedade que se chama values change que ela e um observable.
+this.searchControl.valueChanges.subscribe()
+
+
+Para passar ao backend o que esta sendo digitado para realizar a busca.
+A classe alterada foi restaurants.service.ts
+o atributos do parametro foi deixado como opcional para que nao quebre o build e para que os outros metodos
+que tambem usam esse componente nao quebrem.
+Uma vez que temos esse atributo"o que foi digitado" passamos ele como parametro na url e esse è o segundo 
+parametro do metodo get.
+return this.http.get(`${MEAT_API}/restaurants`, {params: {q: search} } )
+A letra q indica ao json server que ele deve efetuar a busca em todo o conteudo e nao somente em uma tag.
