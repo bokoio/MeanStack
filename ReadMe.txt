@@ -1896,6 +1896,7 @@ Tambem foi inserido e evento do botao de pesquisa para mostrar ou esconder a bar
 
 S12A104 - Observable ValueChanges de Reactive Forms:
 
+Filtrar enquanto se esta digitando.
 
 Foram criados os controlers do form no componente restautants.componet.ts e inseriada a dependencia no form html 
 
@@ -1913,3 +1914,45 @@ Uma vez que temos esse atributo"o que foi digitado" passamos ele como parametro 
 parametro do metodo get.
 return this.http.get(`${MEAT_API}/restaurants`, {params: {q: search} } )
 A letra q indica ao json server que ele deve efetuar a busca em todo o conteudo e nao somente em uma tag.
+
+Esse metodo nao é o mais eficaz uma vez que faz uma requisiçao a base de dados a cada letra digitada.
+
+A melhor forma de implementar é a forma explicada na aula S11A105
+
+
+S11A105 - Operadores debounceTime e distinctUntilChanged
+
+As modificas que serao implementadas sao para melhorar o desempenho da aplicaçao
+para que o acesso ao backend nao seja executado a cada letra digitada.
+
+
+Para logar o que esta sendo digitado na barra 
+foi importado o operador DO no component restaurants
+import 'rxjs/add/operator/do'
+
+operador debounceTime
+so vai emitir um evento se a diferença entre 2 eventos for maior que um determinado periodo.
+
+Por exemplo ele vai esperar 500ms apos a primeira digitaçao para depois emitir o evento. dando tempo para a palavra seja mais completa e que o acesso ao backend seja "a cada 500ms"
+
+Se for feita a mesma pesquisa o mesmo evento é disparado para que seja feita a mesma consulta, consumindo backend.
+
+Para ajustar isso e nao consultar de novo mantendo a mesma consulta, existe o operador distinctUntilChanged (import 'rxjs/add/operator/distinctUntilChanged')
+que caso a string de pesquisa seja a mesma ele nao vai consultar novamente e sim somente exibir novamente o resultado na tela.
+
+Aqui è onde esta sendo feita a consulta:
+
+No caso somente ira ser efetuada a consulta a cada 500ms e se o valor passado for diferente do anterior.
+
+this.searchControl.valueChanges
+      .debounceTime(500) // tempo de espera
+      .distinctUntilChanged()// stado mudou
+      .do(searchTerm => console.log(`q=${searchTerm}`))//log da consulta
+      .switchMap(searchTerm => this.RestaurantsService.restaurants(searchTerm))
+      .subscribe(restaurants => this.restaurants = restaurants) //consulta 
+
+
+Inserido junto a barra (pois ela mantem o filtro apos fechada) indicaçao do que foi digitado.
+
+  <span *ngIf="iptSearch.value"><small>"{{iptSearch.value}}"</small></span>
+  
