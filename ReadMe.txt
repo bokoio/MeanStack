@@ -1920,7 +1920,7 @@ Esse metodo nao é o mais eficaz uma vez que faz uma requisiçao a base de dados
 A melhor forma de implementar é a forma explicada na aula S11A105
 
 
-S11A105 - Operadores debounceTime e distinctUntilChanged
+S12A105 - Operadores debounceTime e distinctUntilChanged
 
 As modificas que serao implementadas sao para melhorar o desempenho da aplicaçao
 para que o acesso ao backend nao seja executado a cada letra digitada.
@@ -1959,7 +1959,7 @@ Inserido junto a barra (pois ela mantem o filtro apos fechada) indicaçao do que
 
 
 
-S11A106 - Prevenindo a interrupçao do Observable ValueChanges(tratamento de erros)
+S12A106 - Prevenindo a interrupçao do Observable ValueChanges(tratamento de erros)
 
 O observable ValueChanges é um observable reutilizavel, diferente do observable http onde o evento é disparado seja com erro ou com a mensagem de sucesso.
 
@@ -1985,5 +1985,83 @@ import {Observable} from "rxjs"
 inserida uma div para apresentar uma mensagem mais amigavel ao usuario
 
 sempre no componente restaurants...
+
+
+S13A107 - Novo modulo HttpClient do Angular
+
+
+Apartir da versao 4.3 do angular as requisiçoes Http mudaram um pouco
+A forma de importar o metodo Http e o modo como sao restituidas as informaçoes do body.
+
+Exemplo:
+
+Usando Http
+
+
+Era dessa forma:
+restaurantById(id: string): Observable<retaurant>{
+	return this.http.get(`restaurants/${id}`)
+	.map(response => response.json())
+}
+
+Agora:
+
+restaurantById(id: string): Observable<retaurant>{
+	return this.http.get<Restaurant>(`restaurants/${id}`)
+}
+
+
+Obtendo informaçoes da resposta do header
+
+Antes:
+
+this.http.get<Restaurant[]>(`/restaurants`)
+				 .subscribe(rests=>this.rests = rests)
+
+Depois:
+
+this.http.get<Restaurant[]>(`/restaurants`,{observe:'response'})
+				 .subscribe(rests=> {
+				 						.resp.headers.get('X-PageSize')
+				 						.this.rests = resp.body
+				 })
+
+
+S13A108 - Refatorando aplicaçao para usar o novo HttpClient
+
+
+Começamos por fazer o update das versoes do Angular e das dependencias alterando o arquivo package.json
+
+Substituindo o "dependencies" e o "devDependencies"
+
+
+Somente para manter um backup para as versoes anteriores do codigo.
+dentro da pasta S12A106 tem a pasta do node utilizada ate aqui, antes da atualizaçao para versao posterior do angular 4.3
+
+na pasta raiz do projeto (meat-app-starter-master)
+no terminal executei o seguinte comando:
+npm install = npm i
+e
+ng build
+
+Muitos error reportados pelo build
+Por causa do metodo Http do angular que mudou alteramos para HttpClient
+
+Iniciada a correçao pelo arquivo principal da aplicaòao o app.module.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
