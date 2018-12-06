@@ -2097,9 +2097,15 @@ server.listen(3000, () => {
 
 
 
+S14A110 - BackEnd Utilizando HTTPS e TypeScript
+
+tsc -w para compilar ao salvar o ts
+
+O script anterior foi alterado para usar express.
 
 
 
+Parei no minuto 11:10
 
 
 
