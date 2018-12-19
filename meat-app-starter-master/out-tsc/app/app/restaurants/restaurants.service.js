@@ -8,30 +8,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { MEAT_API } from '../app.api';
-import { ErrorHandler } from '../app.error-handler';
 var RestaurantsService = /** @class */ (function () {
     /*Recebendo a requisiçao http*/
     function RestaurantsService(http) {
         this.http = http;
         // code...
     }
-    RestaurantsService.prototype.restaurants = function () {
-        return this.http.get(MEAT_API + "/restaurants")
-            .map(function (response) { return response.json(); })
-            .catch(ErrorHandler.handlreError);
+    // aqui foi inserido o codigo de pesquisa por restaurantes
+    // o que nos 
+    RestaurantsService.prototype.restaurants = function (search) {
+        var params = undefined;
+        if (search) {
+            params = new HttpParams().set('q', search); //Instanciando objeto com parametro
+        }
+        return this.http.get(MEAT_API + "/restaurants", { params: params });
     };
     RestaurantsService.prototype.restaurantById = function (id) {
-        return this.http.get(MEAT_API + "/restaurants/" + id)
-            .map(function (response) { return response.json(); })
-            .catch(ErrorHandler.handlreError);
+        return this.http.get(MEAT_API + "/restaurants/" + id);
+    };
+    RestaurantsService.prototype.reviewsOfRestaurant = function (id) {
+        return this.http.get(MEAT_API + "/restaurants/" + id + "/reviews");
+    };
+    RestaurantsService.prototype.menuOfRestauran = function (id) {
+        return this.http.get(MEAT_API + "/restaurants/" + id + "/menu");
     };
     RestaurantsService = __decorate([
         Injectable(),
-        __metadata("design:paramtypes", [Http])
+        __metadata("design:paramtypes", [HttpClient])
     ], RestaurantsService);
     return RestaurantsService;
 }());

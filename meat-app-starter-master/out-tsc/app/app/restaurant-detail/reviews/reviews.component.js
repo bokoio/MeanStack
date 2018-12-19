@@ -8,17 +8,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { RestaurantsService } from '../../restaurants/restaurants.service';
 var ReviewsComponent = /** @class */ (function () {
-    function ReviewsComponent() {
+    function ReviewsComponent(restaurantsService, route) {
+        this.restaurantsService = restaurantsService;
+        this.route = route;
     }
     ReviewsComponent.prototype.ngOnInit = function () {
+        /*Esse componente é filho por isso nao tem acesso diretamente aos valores da rota
+        por isso tem que usar a marcaçao parent  */
+        this.reviews = this.restaurantsService
+            .reviewsOfRestaurant(this.route.parent.snapshot.params['id']);
     };
     ReviewsComponent = __decorate([
         Component({
             selector: 'mt-reviews',
             templateUrl: './reviews.component.html'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [RestaurantsService,
+            ActivatedRoute])
     ], ReviewsComponent);
     return ReviewsComponent;
 }());

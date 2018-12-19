@@ -2103,17 +2103,15 @@ tsc -w para compilar ao salvar o ts
 
 O script anterior foi alterado para usar express.
 
+nodemon --watch backend backend/dist/server.js
 
 
-Parei no minuto 11:10
+node /backend/dist/server.js
+sudo service apache2 stop
+ sh git.sh "S14A110 - BackEnd Utilizando HTTPS e TypeScript"
 
 
+S14A111 - Criando rotas para o login
 
-
-
-
-
-
-
-
-
+As rotas foram criadas dentro do arquivo server.ts
+foram criados os arquivos auth.ts e users.ts

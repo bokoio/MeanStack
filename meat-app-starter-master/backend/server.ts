@@ -1,8 +1,10 @@
 import * as jsonServer from 'json-server'
 import {Express} from 'express'
+
 import * as fs from 'fs'
 import * as https from 'https'
 
+import {handleAuthentication} from './auth'
 
 const server: Express = jsonServer.create()
 const router = jsonServer.router('db.json')
@@ -15,6 +17,12 @@ server.use(middlewares)
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser)
 
+//middleware para login
+server.post('/login',handleAuthentication)
+
+//use default router
+server.use(router)
+
 //Lendo os certificados do disco
 const options= {
 	cert: fs.readFileSync('./backend/keys/cert.pem'),
@@ -23,7 +31,7 @@ const options= {
 
 //Https
 
-https.createServer(options, server).listen(3001, () => {
-  console.log('JSON Server is running on https://localhost:3001')
+https.createServer(options, server).listen(3002, () => {
+  console.log('JSON Server is running on https://localhost:3002  by Pippo!!' )
 })
 

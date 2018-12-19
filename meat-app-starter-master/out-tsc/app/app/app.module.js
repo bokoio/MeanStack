@@ -5,22 +5,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, PreloadAllModules } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component';
-import { RestaurantsService } from './restaurants/restaurants.service';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shopping-cart.component';
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
+import { OrderSumaryComponent } from './order-sumary/order-sumary.component';
+import { SharedModule } from './shared/shared.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -30,21 +32,24 @@ var AppModule = /** @class */ (function () {
                 AppComponent,
                 HeaderComponent,
                 HomeComponent,
-                AboutComponent,
                 RestaurantsComponent,
                 RestaurantComponent,
                 RestaurantDetailComponent,
                 MenuComponent,
                 ShoppingCartComponent,
                 MenuItemComponent,
-                ReviewsComponent
+                ReviewsComponent,
+                OrderSumaryComponent,
+                NotFoundComponent
             ],
             imports: [
                 BrowserModule,
-                HttpModule,
-                RouterModule.forRoot(ROUTES)
+                HttpClientModule,
+                BrowserAnimationsModule,
+                RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules }),
+                SharedModule.forRoot()
             ],
-            providers: [RestaurantsService],
+            providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
             bootstrap: [AppComponent]
         })
     ], AppModule);
