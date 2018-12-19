@@ -2115,3 +2115,66 @@ S14A111 - Criando rotas para o login
 
 As rotas foram criadas dentro do arquivo server.ts
 foram criados os arquivos auth.ts e users.ts
+
+
+S14A112 - JWT (Json Web Token)
+
+Token: 
+	- Identifica o portador
+	- Representa o direito de acessar algo dentro do sistema.
+Veio para simplificar a autenticaçao de acesso ao sistema.
+
+
+S14A113 - Estrutora de um token JWS
+
+O token é composto por 3 partes:
+HEADER - Cabeçalho
+PAYLOAD - Corpo
+SIGNATURE - Assinatura
+
+
+Os campos que carregam as informaçoes do token sao chamados de Kleims
+
+HEADER - Estao localizadas as informaçoes sobre o token
+Algoritmo utilizado para assinar o token e o tipo do token:
+  {
+		"alg": "HS256", //Has de 256KB
+		"typ": "JWT" //Tipo é opcional mas no caso é JWT(Json Web Token)
+	}
+
+PAYLOAD - Carrega informaçoes de interesse da aplicaçao
+As informaçoes do corpo podem ser
+Registrados(que os expecificados e definidos pelo padrao JSWT), Publicas ou Privadas
+Os principais tipos Registrados:
+"sub" = subject (que representa o principal interessado no caso pode ser o username de acesso a aplicaçao)
+"iss" = issuer (que representa quem gerou o token)
+"exp" = expire (determina por quanto tempo o token ira ficar valido)
+
+"sub": "user@hotmail.com",
+"iss": "my-token-manager",
+"exp": "1503183549",
+Esses nomes sao abreviados na aplicaçao para poupar espaço.
+Outras informaçoes(kleims) podem ser inseridas no token pela aplicacao que sao chamados de privados
+
+"profile":"admin",
+"name": "Joaozinho",
+
+
+Para formar o token o header e o payload sao codificados em base64 e unidos por 1 ponto(.)
+A assinatura é opcional mas se feita tambem sera unida por 1 ponto e sera a terceira parte do token
+
+A API auth0
+é a responsavel por gerar o token (converter em base64, colocar os pontos e concatenar os 3 parametros do token) recebendo 
+os parametros em formato json adicionando a assinatura 
+Exemplo:
+
+jwt.sign({ sub: 'user@hotmail.com',
+					 exp: Math.floor(Date.now() / 1000) + (60*60), /validade de 1 hora
+					 iss: 'my-token-manager'},
+					 'my-signature-password')
+
+S14A114 - Adicionando Token JWT - a rota de login.
+
+importando e criando a funçao que ira gerar o token.
+
+auth.ts
