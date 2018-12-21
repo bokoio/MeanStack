@@ -2196,3 +2196,16 @@ resp.setHeader('WWW-Authenticate', 'Bearer token_type="JWT"')
 Esta sendo identificado o tipo de token esperado pela aplicaçao
 
 A password do token esta no arquivo api-config.ts
+
+
+
+S15116 - Preparando a Pagina de login.
+
+
+Criado o componente login, onde foi criada a pagina de login e criada a rota para esse novo componente.
+tambem foi alterado o componente que faz a conexao com o backend para https e a nova porta 3002
+
+
+***Se por acaso ao acessar a lista de restaurantes abre o localhost do backend e aceita o acesso mesmo nao protegido.***
+
+
