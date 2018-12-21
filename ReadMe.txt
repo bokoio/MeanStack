@@ -2178,3 +2178,21 @@ S14A114 - Adicionando Token JWT - a rota de login.
 importando e criando a funçao que ira gerar o token.
 
 auth.ts
+
+
+
+S14A115 - Middleware de Autorizaçao(JWT)
+
+Validar o token para permitir o acesso.
+
+Nessa parte do codigo o req e o resp foram tipados o next nao precisa tipar pois é so um callback.
+export const handleAuthorization = (req: Request, resp: Response, next) => {
+
+}
+
+
+Nesse trecho de codigo:
+resp.setHeader('WWW-Authenticate', 'Bearer token_type="JWT"') 
+Esta sendo identificado o tipo de token esperado pela aplicaçao
+
+A password do token esta no arquivo api-config.ts
