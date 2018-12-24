@@ -2209,3 +2209,7 @@ tambem foi alterado o componente que faz a conexao com o backend para https e a 
 ***Se por acaso ao acessar a lista de restaurantes abre o localhost do backend e aceita o acesso mesmo nao protegido.***
 
 
+S15117 - Criando o component de login:
+
+Foram feitas alteraçoes nos componentes de input e de login para validar os campos e abiilitar o botao somente com os campos preenchidos.
+Ainda nao esta ligado ao backend para validar a existencia de usuario e nem da password.
