@@ -2224,4 +2224,15 @@ shared.module.ts
 user.model.ts
 
 
+S15A119 - Realizando compra com autenticaçao:
+
+Com o componente notificationServices que ja foi codificado, iremos implementar a notificaçao de autenticacao sucedida ou falida.
+import {NotificationService} from '../../shared/messages/notification.service'
+
+Passar para a compra o usuario logado no sistema:
+
+order.service
+
+Localstorage e sessionStorage servem para armazenar as informaçoes nao so de login mas outras informaçoes tambem.
+lembrando que essas informaçoes ficam disponiveis para qualquer um.
 
