@@ -2213,3 +2213,15 @@ S15117 - Criando o component de login:
 
 Foram feitas alteraçoes nos componentes de input e de login para validar os campos e abiilitar o botao somente com os campos preenchidos.
 Ainda nao esta ligado ao backend para validar a existencia de usuario e nem da password.
+
+
+S15118 - Criando o serviço de login(classe de login):
+
+Comunicaçao do frontend com o backend.
+
+login.services.ts
+shared.module.ts 
+user.model.ts
+
+
+
