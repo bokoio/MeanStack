@@ -2236,3 +2236,14 @@ order.service
 Localstorage e sessionStorage servem para armazenar as informaçoes nao so de login mas outras informaçoes tambem.
 lembrando que essas informaçoes ficam disponiveis para qualquer um.
 
+Nessa aplicaçao assim que é feito um refresh na pagina os dados sao apagados.
+
+
+
+
+ sh git.sh "S15A119 - Realizando compra com autenticaçao"
+cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | ng serve --port 4202
+
+cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | node backend/dist/server
+
+cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master/backend | tsc -w
