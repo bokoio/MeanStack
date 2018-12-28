@@ -21,7 +21,7 @@ export const ROUTES: Routes = [
     {path: 'reviews', component: ReviewsComponent}
   ]},
   {path:'restaurants', component: RestaurantsComponent},
-  {path:'order', loadChildren: './order/order.module#OrderModule', canLoad: [LoggedindGard] },
+  {path:'order', loadChildren: './order/order.module#OrderModule', canLoad: [LoggedindGard], canActivate: [LoggedindGard] },
   {path:'order-sumary', component: OrderSumaryComponent},
   {path:'**', component: NotFoundComponent}
 ]

@@ -2240,14 +2240,35 @@ Nessa aplicaçao assim que é feito um refresh na pagina os dados sao apagados.
 
 S15A120 - Protegendo o metodo de compras com o CanLoad
 
-Apresentar a pagina de login dinamicamente, caso nao esteja logado ao finalizar a compra, etc....
+Apresentar a pagina de login dinamicamente, caso nao esteja logado ao finalizar a compra...
 RoutesGard um dos RoutesGard é o CanLoad.
 Que foi implementado como provider por conta da flexibilidade.
+O CanLoad serve para verificar se é possivel ou nao carregar um modulo.
+No nosso caso o modulo que esta sendo protegido é o modulo de compras
+security/loggedin.gard.ts
+Onde verifico se ao tentar finalizar uma compra o utilizador esta autenticado ou nao.
+
+
+S15A121 - Protegendo o metodo de compras com o CanActivete
+
+Serve para verificar se o usuario entrou e saiu da app e depois quis retornar ao app mesmo deslogado o sistema ira permitir a visulizaçao do modulo, porque a rota ja foi carregada uma vez.
+
+ActivatedRouteSnapshot = Representa uma copia da rota que foi ativada.
+RouterStateSnapshot = Arvore de rotas utilizadas ate chegar ao ponto onde esta sendo utilizado no metodo....
+
+Quando o usuario nao esta autenticado e é redirecionado para a pagina de login a url fica de uma forma nao muito 
+"agradavel" (login/%2Forder) para que isso nao fique desse jeito a url foi encriptada em base64.
+para isso foi utilizada a funcao nativa do javascript BTOA para encriptar e para decriptar tambem ATOB
+login.services.ts para encriptar
+login.component.ts para desencriptar
 
 
 
 
-sh git.sh "S15A119 - Realizando compra com autenticaçao"
+
+
+
+sh git.sh "S15A120 - Protegendo o metodo de compras com o CanLoad"
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | ng serve --port 4202
 
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | node backend/dist/server
