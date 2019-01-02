@@ -2371,12 +2371,15 @@ Para corrigir esse problema, usar o Injector que é uma referencia para o mecani
 Péor meio do injector é possivel pegar qualquer referencia que esteja dentro do container de injeçao de dependencias.
 
 
+S16A126 - Error Handler Global:
+
+shared/app.error-handler.ts:
+Alteramos o nome da classe e extendemos a classe do angular ErrorHandler
 
 
 
 
-
-sh git.sh "S15A123 - Utilizando Route Gard CanDeactivate na compra."
+sh git.sh "S15A125 - Utilizando o HttpInterceptors:"
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | ng serve --port 4202
 
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | node backend/dist/server
