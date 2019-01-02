@@ -2375,11 +2375,23 @@ S16A126 - Error Handler Global:
 
 shared/app.error-handler.ts:
 Alteramos o nome da classe e extendemos a classe do angular ErrorHandler
+é possivel impletar outras mensagens de erros com base no retorno exemplo 500,420, etc...
+
+
+
+S16A127 - Utilizando Zonas(NgZone):
+
+
+Alteraçoes que deveriam refletir na tela e nao estao refletindo utilizar o NgZone.
+app.error-handler.ts
+Para testar alterar qualquer rota do arquivo restaurants.service.ts 
 
 
 
 
-sh git.sh "S15A125 - Utilizando o HttpInterceptors:"
+
+
+sh git.sh "S16A127 - Utilizando Zonas(NgZone)"
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | ng serve --port 4202
 
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | node backend/dist/server
