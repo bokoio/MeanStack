@@ -2388,6 +2388,90 @@ Para testar alterar qualquer rota do arquivo restaurants.service.ts
 
 
 
+S17A128 - Atualizando as dependencias da aplicaçao:
+
+
+Alterei o arquivo package.json inserindo essas configuraçoes:
+"dependencies": {
+  "@angular/animations": "6.0.0-rc.5",
+  "@angular/common": "6.0.0-rc.5",
+  "@angular/compiler": "6.0.0-rc.5",
+  "@angular/core": "6.0.0-rc.5",
+  "@angular/forms": "6.0.0-rc.5",
+  "@angular/platform-browser": "6.0.0-rc.5",
+  "@angular/platform-browser-dynamic": "6.0.0-rc.5",
+  "@angular/platform-server": "6.0.0-rc.5",
+  "@angular/router": "6.0.0-rc.5",
+  "admin-lte": "2.3.11",
+  "core-js": "2.5.4",
+  "font-awesome": "4.7.0",
+  "intl": "1.2.5",
+  "jquery": "3.1.1",
+  "reflect-metadata": "0.1.10",
+  "rxjs": "6.0.0-uncanny-rc.7",
+  "rxjs-compat": "6.0.0-uncanny-rc.7",
+  "ts-helpers": "1.1.2",
+  "web-animations-js": "2.2.5",
+  "zone.js": "0.8.26",
+  "ajv": "6.0.0"
+},
+"devDependencies": {
+  "@angular-devkit/build-angular": "0.5.0",
+  "@angular/compiler-cli": "6.0.0-rc.5",
+  "@angular/cli": "6.0.0-rc.5",
+  "@angular/language-service": "6.0.0-rc.1",
+  "@types/jasmine": "2.8.6",
+  "@types/jasminewd2": "2.0.3",
+  "@types/node": "8.9.4",
+  "@types/express": "4.0.37",
+  "@types/jsonwebtoken": "7.2.3",
+  "codelyzer": "4.2.1",
+  "jasmine-core": "2.99.1",
+  "jasmine-spec-reporter": "4.2.1",
+  "karma": "1.7.1",
+  "karma-chrome-launcher": "2.2.0",
+  "karma-coverage-istanbul-reporter": "1.4.2",
+  "karma-jasmine": "1.1.1",
+  "karma-jasmine-html-reporter": "0.2.2",
+  "protractor": "5.3.0",
+  "ts-node": "5.0.1",
+  "tslint": "5.9.1",
+  "json-server": "0.12.0",
+  "jsonwebtoken": "7.4.1",
+  "typescript": "2.7.2",
+  "webdriver-manager": "12.0.6"
+}
+
+Na raiz da app npm i 
+
+quando finalizado o install 
+é necessario atualizar o angular-cli.json (que foi descontinuado nas versoes mais recentes do angular)
+o proprio npm propos o comando:
+
+ng update @angular/cli --migrate-only --from=1
+
+
+Apos ser finalizado o update:
+Se tentar subir o servidor vai dar esse erro:
+Schema validation failed with the following errors:
+  Data path ".scripts[0]" should be object.
+
+para corrigir:
+o problema foi durante a migraçao do Scripts e Styles: onde inseri os
+dessa forma colocando {"input":}
+              {"input":"node_modules/jquery/dist/jquery.min.js"},
+              {"input":"node_modules/admin-lte/bootstrap/js/bootstrap.min.js"},
+              {"input":"node_modules/admin-lte/dist/js/app.min.js"}
+            
+depois o server subiu.
+Mas a app ainda nao vai funcionar:
+O primeiro problema è a internacionalizaçao que nas versoes anteriores do angular utilizavam o polyfil e que na versao 6 foi trocada por outro modulo o registerLocaleData do angular common.
+alteraçao no app.module.ts
+
+
+
+
+
 
 
 
