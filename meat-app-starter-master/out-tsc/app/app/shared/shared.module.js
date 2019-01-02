@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InputComponent } from './input/input.component';
 import { RadioComponent } from './radio/radio.component';
 import { RatingComponent } from './rating/rating.component';
@@ -15,6 +16,10 @@ import { ShoppingCartService } from '../restaurant-detail/shopping-cart/shopping
 import { RestaurantsService } from '../restaurants/restaurants.service';
 import { SnackbarComponent } from './messages/snackbar/snackbar.component';
 import { NotificationService } from './messages/notification.service';
+import { LoginService } from '../security/login/login.services';
+import { LoggedindGard } from '../security/loggedin.gard';
+import { LeaveOrderGard } from '../order/leave-order.gard';
+import { AuthInterceptor } from '../security/auth.interceptor';
 var SharedModule = /** @class */ (function () {
     function SharedModule() {
     }
@@ -22,7 +27,14 @@ var SharedModule = /** @class */ (function () {
     SharedModule.forRoot = function () {
         return {
             ngModule: SharedModule_1,
-            providers: [OrderService, ShoppingCartService, RestaurantsService, NotificationService]
+            providers: [OrderService,
+                ShoppingCartService,
+                RestaurantsService,
+                NotificationService,
+                LoginService,
+                LoggedindGard,
+                LeaveOrderGard,
+                { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]
         };
     };
     var SharedModule_1;

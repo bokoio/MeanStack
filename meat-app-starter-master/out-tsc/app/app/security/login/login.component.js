@@ -9,14 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from './login.services';
+import { NotificationService } from '../../shared/messages/notification.service';
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(fb) {
+    function LoginComponent(fb, loginService, notificationService, activatedRoute, router) {
         this.fb = fb;
+        this.loginService = loginService;
+        this.notificationService = notificationService;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
     }
     LoginComponent.prototype.ngOnInit = function () {
         this.loginForm = this.fb.group({
             email: this.fb.control('', [Validators.required, Validators.email]),
-            email: this.fb.control('', [Validators.required, Validators.email]),
+            password: this.fb.control('', [Validators.required])
+        });
+        this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/'); //encript
+    };
+    LoginComponent.prototype.login = function () {
+        var _this = this;
+        this.loginService.login(this.loginForm.value.email, this.loginForm.value.password)
+            .subscribe(function (user) { return _this.notificationService.notify("Bem vindo, " + user.name); }, function (response) {
+            return _this.notificationService.notify(response.error.message);
+        }, function () {
+            _this.router.navigate([atob(_this.navigateTo)]); //decript
         });
     };
     LoginComponent = __decorate([
@@ -25,7 +42,11 @@ var LoginComponent = /** @class */ (function () {
             templateUrl: './login.component.html',
             styleUrls: ['./login.component.css']
         }),
-        __metadata("design:paramtypes", [FormBuilder])
+        __metadata("design:paramtypes", [FormBuilder,
+            LoginService,
+            NotificationService,
+            ActivatedRoute,
+            Router])
     ], LoginComponent);
     return LoginComponent;
 }());

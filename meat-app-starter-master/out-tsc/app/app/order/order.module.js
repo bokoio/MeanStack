@@ -10,8 +10,9 @@ import { RouterModule } from '@angular/router';
 import { OrderComponent } from './order.component';
 import { OrderItemsComponent } from './order-items/order-items.component';
 import { DeliveryCostsComponent } from './delivery-costs/delivery-costs.component';
+import { LeaveOrderGard } from './leave-order.gard';
 var ROUTES = [
-    { path: '', component: OrderComponent }
+    { path: '', component: OrderComponent, canDeactivate: [LeaveOrderGard] }
 ];
 var OrderModule = /** @class */ (function () {
     function OrderModule() {

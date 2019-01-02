@@ -2285,6 +2285,90 @@ Estamos usando o estado do componente pra tomar a decisao de desativar o modulo 
 
 
 
+S15A124 - Http Interceptors o que sao:
+
+Sao capazes de capturar o momento anterior ou posterior a uma chamada http e fazer alteraçao comum a todas as chamdas http, como atribuir um novo header em realtime.
+
+Uma chamada httpcliente (usada para chamar o backend) sem o interceptor chega ao backend realiza a operaçao e retorna ao frontend.
+
+Com o HttpInterceptor a chamada ao backend é interceptada antes que chegue ao backend, para receber uma chamada personalizada:
+Exemplo:
+Recebendo um X-CUSTON-HEADER com um valor qualquer...
+E apos essa personalizaçao a chamada é encaminhada ao backend normalmente.
+
+
+interceptor é um padrao de projeto bem interessante e versatil da pra fazer muita coisa interessante com a aplicaçao:
+3 Tipos de interceptors:
+
+LOGGIN: Logar quando a requisiçao esta sendo feita e com qual conteudo.
+
+PROFILING: Calcular o tempo que as requisiçoes ao backend estao levando, serve para identificar os pontos da aplicaçao que estao precisando de otimizaçao.
+
+ERROR HANDLING: Intercepta a resposta do bakend sendo capaz de produzir um tratamento de erro global para a aplicaçao.
+
+Declaraçao:
+
+export classMyCustonHeaderInterceptor implements HttpInterceptor {
+	intercept(request: HttpRequest<any>, next: HttpHandler):
+																						Obsevable <HttpEvent<any>>{
+			const myRequest = request.clone(
+			{setHeaders: {'X-Custom-Header': 'Value'}})
+			return next.handle(myRequest)
+		}
+}
+
+Esse exemplo clona o request e adiciona um header novo
+
+
+Para comfigurar um interceptor é necessario registrar como token httpinterceptors:
+todo interceptor é registrado para um mesmo token.
+
+Para multiplos interceptors sera respeitada a ordem declarada.
+
+@NgModule({
+	providers:[{provide: HTTP_INTERCEPTORS,
+							useClass: MyCustomInterceptor, multi: true},
+							{provide: HTTP_INTERCEPTORS,
+							useClass: MyAnotherInterceptor, multi: true}]
+})
+export class AppModule{}
+
+Interceptando uma resposta (bem similar implementaçao de um Observable)
+
+export classMyCustonHeaderInterceptor implements HttpInterceptor {
+	intercept(request: HttpRequest<any>, next: HttpHandler):
+																						Obsevable <HttpEvent<any>>{
+			return next.handle(request)
+			           .do(response =>console.log(response.headers) )
+			           .catch(error => {
+			           	     if(error.status === 401){/*.....*/}
+			           	     return Observable.throw(error)
+			           })
+		}
+}
+
+
+S15A125 - Utilizando o HttpInterceptors:
+
+Utilizado o httpinterceptors para passar o token a requisiçao ao backend:
+/security/auth.interceptor.ts
+
+O intercept foi registrado na lista de providers:
+shared.module.ts 
+deve ser registrado em um token especifico:
+HTTP_INTERCEPTORS esse é o token
+
+import{HTTP_INTERCEPTORS} from '@angular/common/http'
+{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true}
+
+
+
+Proximo passo injetar o login service no AuthInterceptor
+
+
+Relaçao ciclica:
+Para corrigir esse problema, usar o Injector que é uma referencia para o mecanismo de injeçao de dependencia do angular.
+Péor meio do injector é possivel pegar qualquer referencia que esteja dentro do container de injeçao de dependencias.
 
 
 
@@ -2292,8 +2376,7 @@ Estamos usando o estado do componente pra tomar a decisao de desativar o modulo 
 
 
 
-
-sh git.sh "S15A121 - Protegendo o metodo de compras com o CanActivete e CriptUrl"
+sh git.sh "S15A123 - Utilizando Route Gard CanDeactivate na compra."
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | ng serve --port 4202
 
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | node backend/dist/server
