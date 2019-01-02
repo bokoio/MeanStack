@@ -2249,7 +2249,7 @@ security/loggedin.gard.ts
 Onde verifico se ao tentar finalizar uma compra o utilizador esta autenticado ou nao.
 
 
-S15A121 - Protegendo o metodo de compras com o CanActivete
+S15A121 - Protegendo o metodo de compras com o CanActivete e CriptUrl
 
 Serve para verificar se o usuario entrou e saiu da app e depois quis retornar ao app mesmo deslogado o sistema ira permitir a visulizaçao do modulo, porque a rota ja foi carregada uma vez.
 
@@ -2263,12 +2263,37 @@ login.services.ts para encriptar
 login.component.ts para desencriptar
 
 
+S15A122 - Acessando a tela de login de outros pontos da aplicaçao.
+
+Criado um elemento de interface que posibilita o usuario de realizar a autenticaçao quando desejar.
+
+
+Criao um novo componente chamado user detail que ira ser adicionado ao header da pagina.
+
+Apos a autenticaçao devolver a pagina onde estava.
+
+
+S15A123 - Utilizando Route Gard CanDeactivate na compra.
+
+Implementaçao de um outro provider em uma outra classe para desativar o modulo de compras (desistencia de uma compra no caso) esse componente ira cancelar as operacoes feitas ate o momento limpando os formularios ja preenchidos.
+
+leave-order.gard.ts dentro da pasta order.
+
+Foi associada a rota do candeactivate no componente order onde esta definda a rota para as compras.(order.module.ts)
+
+Estamos usando o estado do componente pra tomar a decisao de desativar o modulo por isso esta sendo implementado no order component, porque se fosse inserido como uma rota indepente iria ser carregado como undefined e nao teria acesso aos outros metodos e classes....
 
 
 
 
 
-sh git.sh "S15A120 - Protegendo o metodo de compras com o CanLoad"
+
+
+
+
+
+
+sh git.sh "S15A121 - Protegendo o metodo de compras com o CanActivete e CriptUrl"
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | ng serve --port 4202
 
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | node backend/dist/server

@@ -14,6 +14,7 @@ import { SnackbarComponent } from './messages/snackbar/snackbar.component'
 import { NotificationService } from './messages/notification.service'
 import { LoginService } from '../security/login/login.services'
 import { LoggedindGard } from '../security/loggedin.gard'
+import { LeaveOrderGard } from '../order/leave-order.gard'
 
 
 @NgModule({
@@ -32,7 +33,8 @@ export class SharedModule {
 			            RestaurantsService,
 			            NotificationService,
 			            LoginService,
-			            LoggedindGard]
+			            LoggedindGard,
+			            LeaveOrderGard]
 		}
 	}
 

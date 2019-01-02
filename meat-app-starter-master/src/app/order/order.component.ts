@@ -8,6 +8,7 @@ import { RadioOption } from '../shared/radio/radio-option.model'
 import { OrderService } from './order-service'
 import { CartItem } from '../restaurant-detail/shopping-cart/cart-item.model'
 import { Order, OrderItem} from './order.model'
+import 'rxjs/add/operator/do'
 
 @Component({
   selector: 'mt-order',
@@ -22,7 +23,7 @@ export class OrderComponent implements OnInit {
 
 
   delivery: number = 8
-
+  orderId: string
 	paymentOptions: RadioOption[] = [
 		{label: 'Dinheiro', value: 'MON'},
 		{label: 'Cartao de Debito', value: 'DEB'},
@@ -81,11 +82,17 @@ export class OrderComponent implements OnInit {
     order.orderItems = this.cartItems()
       .map((item:CartItem) => new OrderItem(item.quantity, item.menuItem.id))
     this.orderService.checkOrder(order)
+        .do((orderId: string)=> {
+          this.orderId = orderId
+        })
         .subscribe((orderId: string) =>{
           this.router.navigate(['/order-sumary'])
           this.orderService.clear()
         })
-    console.log(order)
+  }
+
+  isOrderCompleted():boolean{
+   return this.orderId !== undefined
   }
 
 }
