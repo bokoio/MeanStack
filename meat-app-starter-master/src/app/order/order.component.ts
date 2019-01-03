@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms'
+import { FormGroup, FormBuilder, FormControl ,Validators, AbstractControl } from '@angular/forms'
 
 import { Router } from '@angular/router'
 
@@ -35,15 +35,18 @@ export class OrderComponent implements OnInit {
                private formBulder: FormBuilder) { }
 
   ngOnInit() {
-    this.orderForm = this.formBulder.group({
-      name: this.formBulder.control('',[Validators.required, Validators.minLength(5)]),
+    this.orderForm = new FormGroup ({//campos do formulario onde sao realizados os controles
+      name: new FormControl ('',{
+        validators: [Validators.required, Validators.minLength(5)],
+        updateOn: 'blur'
+        }),
       email: this.formBulder.control('',[Validators.required, Validators.pattern(this.emailPattern)]),
       emailConfirmation: this.formBulder.control('',[Validators.required, Validators.email]),
       address: this.formBulder.control('',[Validators.required, Validators.minLength(5)]),
       number: this.formBulder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.formBulder.control(''),
       paymentOption: this.formBulder.control('',[Validators.required])
-    }, {validator: OrderComponent.equalsTo})
+    }, {validators: [OrderComponent.equalsTo], updateOn: 'blur'})
   }
 
   static equalsTo(group: AbstractControl):{[key:string]: boolean}{

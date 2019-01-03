@@ -2470,12 +2470,23 @@ alteraçao no app.module.ts
 
 
 
+S17A129 - Mudando a atualizaçao do formulario(updateOn):
+
+Ate o momento o codigo do formulario fazia a atualizaçao do campo e a validaçao em realtime(ao entrar no campo e digitar um valor qualquer o evento de validaçao ja disparava), com a nova versao do angular é possivel fazer essa validaçao em momento posterior como no onBlur ao sair do campo...
+A refatoraçao do codigo order.component.ts foi feita para que seja possivel validar os campos somente apos sair deles.
+
+
+
+S17A130 - Pipes alteraçoes trazidas pelo Angular5:
 
 
 
 
 
-sh git.sh "S16A127 - Utilizando Zonas(NgZone)"
+
+
+
+sh git.sh "S17A129 - Mudando a atualizaçao do formulario(updateOn):"
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | ng serve --port 4202
 
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | node backend/dist/server
