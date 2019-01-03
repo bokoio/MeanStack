@@ -4,13 +4,8 @@ import { RestaurantsService } from './restaurants.service'
 import { trigger, state, style, transition, animate } from '@angular/animations'
 
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms'
-import 'rxjs/add/operator/switchMap'
-import 'rxjs/add/operator/do'
-import 'rxjs/add/operator/debounceTime'
-import 'rxjs/add/operator/distinctUntilChanged'
-import 'rxjs/add/operator/catch'
-import 'rxjs/add/observable/from'
-import {Observable} from "rxjs"
+import {Observable, from} from 'rxjs'
+import {switchMap, tap, debounceTime, distinctUntilChanged, catchError} from 'rxjs/operators'
 
 
 
@@ -53,13 +48,16 @@ export class RestaurantsComponent implements OnInit {
     })
 
     this.searchControl.valueChanges
-      .debounceTime(500)
-      .distinctUntilChanged()
-      .do(searchTerm => console.log(`q=${searchTerm}`))
-      .switchMap(searchTerm => 
-        this.RestaurantsService.restaurants(searchTerm)//observable que retorna ao switchMap aqui é onde iremos tratar o erro.
-        .catch(error => Observable.from([]))) //retorna um observable vazio
-      .subscribe(restaurants => this.restaurants = restaurants)
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap(searchTerm => console.log(`q=${searchTerm}`)),
+        switchMap(searchTerm => 
+          this.RestaurantsService
+          .restaurants(searchTerm)//observable que retorna ao switchMap aqui é onde iremos tratar o erro.
+          .pipe(catchError(error => from([])))) //retorna um observable vazio
+
+      ).subscribe(restaurants => this.restaurants = restaurants)
 
     this.RestaurantsService.restaurants().subscribe(restaurants => this.restaurants = restaurants)
   }

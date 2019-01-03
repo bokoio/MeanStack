@@ -2514,6 +2514,43 @@ Fazer o build de produçao com a opçao --extract-css=false
 ng build --prod --extract-css=false
 
 
+S17A132 - Rxjs 6 : Como Usar o Novo Operador Pipe
+
+
+Observable nas versoes precendentes ao angular 6 exemplo de um encadeando varios operadores:
+
+this.formControl.valueChages()
+								.filter(text=> text.length>5)
+								.map(text=> text.toUpperCase())
+								.subscribe(text=> /* action */ )
+
+Na nova versao os operadores sao funcoes puras passando por um unico operador o pipe
+
+this.formControl.valueChages()
+                .pipe(
+                 filter(text=> text.length>5),
+								 map(text=> text.toUpperCase())
+								 ).subscribe(text=> /* action */ )
+
+Com essas alteraçoes, podemos escrever as nossas proprias funcoes e adicionar na sequencia de execuçoes utilizando o operador pipe.
+
+
+package.json
+a dependencia
+"rxjs-compat": "6.0.0-uncanny-rc.7",
+é o modulo de compatibilidade entre as versoes precedente do angular com a versao 6 do angular.
+Para aplicaçoes complexas vale a pena deixar essa dependencia. Nessa aplicaçao iremos remover a dependencia
+e refatorar a aplicaçao para usar somente a versao 6 do angular.
+Existe uma opçao formida pelo angular de migrar automanticamente é o modulo RxJS TSLint
+https://github.com/ReactiveX/rxjs-tslint
+
+apos remover a dependencia:
+npm i / para efetivamente remover a dependencia
+
+ng build / para verificar os errors e ajustar as chamadas para a nova biblioteca.
+
+O operador DO foi substituido pelo TAP
+ver exemplo no snackbar.component.ts
 
 
 
@@ -2522,7 +2559,13 @@ ng build --prod --extract-css=false
 
 
 
-sh git.sh "S17A130 - Pipes alteraçoes trazidas pelo Angular5"
+
+
+
+
+
+
+sh git.sh "S17A131 - Melhorias no processo de compilaçao"
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | ng serve --port 4202
 
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | node backend/dist/server
