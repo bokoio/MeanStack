@@ -2485,6 +2485,33 @@ shopping-cart.component.html
 
 
 
+S17A131 - Melhorias no processo de compilaçao
+
+Foram implementadas varias melhorias na compilaçao do projeto.
+uma delas é que a compilaçao é monitorada e a cada comit o projeto é compilado e em pequenas partes por vez, compilaçao incremental.
+
+um problema que apareceu foi o espaçamento entre os botoes, que foi removido devido ao novo motor de calculo de espaços para montar as telas.
+para sanar esse prolema, foi criada a opçao preserveWhitespaces.
+shopping-cart.component.ts
+onde foi inserido a nivel local, pode ser tambem configurado a nivel global porem serve somente para teste e desenvolvimento:
+Pois temos a headtime compiling isso possibilita essa configuraçao:
+main.ts
+
+o build de produçao a configuraçao é feita no tsconfig.json
+inserindo a confguraçao:
+
+"angularCompilerOptions":{
+	"preserveWhitespaces": true
+},
+
+Outro problema sao as imagens do botao font awesome (por exemplo o adicionar item sinal de + some apos o refresh da pagina.)
+angular.json
+tem os stilos css 
+Sera removido do arquivo angular.json e inserido no index.html da aplicaçao
+
+Para o build de produçao a versao 6 ainda tem um bug em relaçao aos CSS que nao carregam corretamente.
+Fazer o build de produçao com a opçao --extract-css=false
+ng build --prod --extract-css=false
 
 
 
@@ -2492,7 +2519,10 @@ shopping-cart.component.html
 
 
 
-sh git.sh "S17A129 - Mudando a atualizaçao do formulario(updateOn):"
+
+
+
+sh git.sh "S17A130 - Pipes alteraçoes trazidas pelo Angular5"
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | ng serve --port 4202
 
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | node backend/dist/server
