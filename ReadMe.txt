@@ -2479,6 +2479,12 @@ A refatoraçao do codigo order.component.ts foi feita para que seja possivel val
 
 S17A130 - Pipes alteraçoes trazidas pelo Angular5:
 
+Os pipes de data, currency etc...sofreram alteraçoes.
+Na app que desenvolvida o pipe usado é o currency.
+shopping-cart.component.html
+
+
+
 
 
 
