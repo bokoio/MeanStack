@@ -24,7 +24,7 @@ function extractToken(req) {
     if (req.headers && req.headers.authorization) {
         //O token chega dessa forma:
         //Bearer ZZZZ.ZZZZ.ZZZZ
-        var parts = req.headers.authorization.split(' ');
+        var parts = req.header('authorization').split(' ');
         if (parts.length === 2 && parts[0] === 'Bearer') {
             token = parts[1];
         }

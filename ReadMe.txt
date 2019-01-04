@@ -2554,18 +2554,22 @@ ver exemplo no snackbar.component.ts
 
 
 
+S17A133 - Componentes com Angular Elements
+
+Serve para criar componentes para serem utilizados em aplicaçaos que nao sao angular.
+Podem ser usados em qualquer aplicaçao que utilize javascript.
+
+*NAO UTILIZAR EM APLICAÇOES ANGULAR."
+
+Criado um novo projeto rating-custom-element
+ng new rating-custom-element
+
+instalado o componente elements
+npm i @angular/elements@6.0.0-rc.5 -P
+npm i @webcomponents/custom-elements -P
 
 
-
-
-
-
-
-
-
-
-
-sh git.sh "S17A131 - Melhorias no processo de compilaçao"
+sh git.sh "S17A132 - Rxjs 6 : Como Usar o Novo Operador Pipe"
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | ng serve --port 4202
 
 cd Dev/UDMY_MEAT/MEAT_APP/meat-app-starter-master | node backend/dist/server
